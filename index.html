@@ -1,0 +1,84 @@
+<html>
+	<head> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	</head>
+
+	<body>		
+		
+	<table style="width:100%">
+		<tr style="background-color:black;text-align:right">
+			<td colspan="2">
+				<img class="cart" src="assets/images/cart-lrg.png" alt="Cart" />
+			</td>
+		</tr>
+
+		<tr style=""><td colspan="2"></td></tr>
+
+		<tr>
+			<td style="background-color:pink;text-align:center">
+				<section class="items">
+					<img src="assets/images/demo/lumia.png" alt="iPhone"/>
+					<button class="add-to-cart-btn" type="button"> Add to cart</button>
+				</section>	
+			</td>
+			<td style="background-color:yellow;text-align:center">
+				<section class="items">
+					<img src="assets/images/demo/s3.png" alt="iPhone" />
+					<button class="add-to-cart-btn" type="button"> Add to cart</button>
+				</section>
+			</td>
+		</tr>
+	</table>
+		
+		
+		
+	</body>
+</html>
+
+<script>
+$(".add-to-cart-btn").on('click', function () {
+		console.log("Hit");
+		var flyingImg = $(this).parent().find("img").eq(0);
+		
+		if (flyingImg) {
+			var flyingImgClone = flyingImg.clone()
+				.offset({
+				top: flyingImg.offset().top,
+				left: flyingImg.offset().left
+			})
+				.css({
+					'opacity': '0.5',
+					'position': 'absolute',
+					'height': flyingImg.height() /2,
+					'width': flyingImg.width() /2,
+					'z-index': '100'
+			})
+				.appendTo($('body'))
+				.animate({
+					'top': $('.cart').offset().top + 10,
+					'left': $('.cart').offset().left + 15,
+					'height': flyingImg.height() /2,
+					'width': flyingImg.width() /2
+			}, 1000, 'easeInOutExpo');
+
+			if (true) {
+				setTimeout(function () {
+					$('.cart').effect("shake", {
+						times: 2
+					}, 200);
+				}, 1500);
+			}
+
+
+			flyingImgClone.animate({
+					'width': 0,
+					'height': 0
+				}, function () {
+					$(this).detach()
+			});
+		}
+});
+
+</script>
